@@ -95,3 +95,5 @@ class DuenoController extends Controller
             ->with('success', 'Dueño eliminado exitosamente.');
     }
 }
+
+?>

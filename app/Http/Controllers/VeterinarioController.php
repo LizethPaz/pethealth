@@ -86,3 +86,4 @@ class VeterinarioController extends Controller
             ->with('success', 'Veterinario eliminado permanentemente');
     }
 }
+?>

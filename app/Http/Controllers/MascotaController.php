@@ -12,7 +12,8 @@ class MascotaController extends Controller
      */
     public function index()
     {
-        $mascotas = Mascota::all();
+        //ver de a 10 mascotas
+        $mascotas = Mascota::paginate(10);
         return view('mascotas.index', compact('mascotas'));
     }
 
@@ -81,9 +82,14 @@ class MascotaController extends Controller
      */
     public function destroy(Mascota $mascota)
     {
+        if ($mascota->dueno()->exists()) {
+            return redirect()->route('mascotas.index')
+                ->with('error', 'No se puede eliminar la mascota porque tiene un dueño asociado.');
+        }
+    
         $mascota->delete();
-
         return redirect()->route('mascotas.index')
             ->with('success', 'Mascota eliminada exitosamente.');
     }
 }
+?>

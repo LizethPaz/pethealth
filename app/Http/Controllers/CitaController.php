@@ -306,3 +306,5 @@ class CitaController extends Controller
         ));
     }
 }
+
+?>
