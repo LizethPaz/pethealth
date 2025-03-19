@@ -37,7 +37,7 @@ class CitaController extends Controller
         $horasDisponibles = $this->generarHorasDisponibles();
         
         return view('citas.create', compact('duenos', 'mascotas', 'veterinarios', 'horasDisponibles'));
-    }
+    }  
 
     /**
      * Store a newly created resource in storage.
@@ -183,7 +183,7 @@ class CitaController extends Controller
         
         while ($horaInicio <= $horaFin) {
             $horasDisponibles[] = $horaInicio->format('H:i');
-            $horaInicio->addMinutes(15);
+            $horaInicio->addMinutes(20);
         }
         
         return $horasDisponibles;
@@ -192,13 +192,35 @@ class CitaController extends Controller
     /**
      * Obtener mascotas por dueño para cargar dinámicamente
      */
-    public function getMascotasPorDueno($idDueno)
-    {
-        $mascotas = Mascota::where('idDueno', $idDueno)
-                           ->get(['idMascota', 'nombre']);      
-        return response()->json($mascotas);
 
+     
+     
+    public function obtenerMascotas($idDueno)
+    {
+        // Registrar el tiempo de inicio
+        $inicio = microtime(true);
+    
+        // Buscar el dueño
+        $dueno = Dueno::find($idDueno);
+    
+        if (!$dueno) {
+            Log::warning("Dueño con ID $idDueno no encontrado.");
+            return response()->json(['error' => 'Dueño no encontrado'], 404);
+        }
+    
+        // Obtener las mascotas asociadas
+        $mascotas = $dueno->mascota ?? ['No encontrada'];
+    
+        // Registrar el tiempo de finalización
+        $fin = microtime(true);
+        $duracion = round(($fin - $inicio) * 1000, 2); // Convertir a milisegundos
+    
+        // Registrar en el log
+        Log::info("Mascotas obtenidas para el dueño $idDueno en $duracion ms.");
+    
+        return response()->json($mascotas);
     }
+    
 
     /**
      * Obtener disponibilidad del veterinario para una fecha específica

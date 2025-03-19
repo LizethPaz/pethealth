@@ -24,6 +24,7 @@ Route::get('/citas-calendario', [App\Http\Controllers\CitaController::class, 'ca
 // 1. -->//Route::get('/mascotas-por-dueno/{idDueno}', [App\Http\Controllers\CitaController::class, 'getMascotasPorDueno']);
 // 2. --> //Route::get('/mascotas-por-dueno/{idDueno}', [App\Http\Controllers\CitaController::class, 'getMascotasPorDueno'])->name('mascotas.por.dueno');
 Route::get('/mascotas-por-dueno/{idDueno}', [App\Http\Controllers\CitaController::class, 'getMascotasPorDueno']);
+Route::get('/duenos/{id}/mascotas', [CitaController::class, 'obtenerMascotas']);
 
 
 Route::resource('citas', CitaController::class);

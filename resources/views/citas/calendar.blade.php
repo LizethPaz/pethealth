@@ -1,5 +1,42 @@
 @extends('layouts.app')
 
+@section('content')
+<div class="container">
+    <h1>Calendario de Citas</h1>
+    <div id="calendar"></div>
+</div>
+
+{{-- FullCalendar --}}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/locales/es.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        locale: 'es',
+        initialView: 'dayGridMonth',
+        events: "{{ route('citas.calendario') }}",
+        eventClick: function(info) {
+            var event = info.event.extendedProps;
+            alert(
+                "Dueño: " + event.dueno + "\n" +
+                "Veterinario: " + event.veterinario + "\n" +
+                "Observaciones: " + (event.observaciones ? event.observaciones : 'Ninguna')
+            );
+        }
+    });
+    calendar.render();
+});
+</script>
+@endsection
+
+
+
+
+<!-- @extends('layouts.app')
+
 @section('styles')
 <style>
     .calendar-wrapper {
@@ -463,4 +500,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
-@endsection
+@endsection -->
