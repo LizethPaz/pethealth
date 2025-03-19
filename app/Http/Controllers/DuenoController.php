@@ -13,7 +13,7 @@ class DuenoController extends Controller
      */
     public function index()
     {
-        $duenos = Dueno::with('mascota')->get();
+        $duenos = Dueno::with('mascota')->get()::paginate(10);
         return view('duenos.index', compact('duenos'));
     }
 

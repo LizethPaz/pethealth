@@ -11,7 +11,7 @@
                         </h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('mascotas.update', $mascota->id) }}" method="POST">
+                        <form action="{{ route('mascotas.update', $mascota->idMascota) }}" method="POST">
                             @csrf
                             @method('PUT')
 

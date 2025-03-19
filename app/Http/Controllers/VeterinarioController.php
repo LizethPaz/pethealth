@@ -9,7 +9,7 @@ class VeterinarioController extends Controller
 {
     public function index()
     {
-        $veterinarios = Veterinario::all();
+        $veterinarios = Veterinario::paginate(10);
         return view('veterinarios.index', compact('veterinarios'));
     }
 
