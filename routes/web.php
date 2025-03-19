@@ -20,6 +20,7 @@ use App\Http\Controllers\VeterinarioController;
 
 // Añadir esta ruta antes de Route::resource
 Route::get('/citas-calendario', [App\Http\Controllers\CitaController::class, 'calendar'])->name('citas.calendar');
+
 // Ruta para obtener mascotas por dueño (AJAX)
 // 1. -->//Route::get('/mascotas-por-dueno/{idDueno}', [App\Http\Controllers\CitaController::class, 'getMascotasPorDueno']);
 // 2. --> //Route::get('/mascotas-por-dueno/{idDueno}', [App\Http\Controllers\CitaController::class, 'getMascotasPorDueno'])->name('mascotas.por.dueno');
@@ -28,6 +29,8 @@ Route::get('/duenos/{id}/mascotas', [CitaController::class, 'obtenerMascotas']);
 
 
 Route::resource('citas', CitaController::class);
+Route::get('/citas-historial/{idMascota?}', [CitaController::class, 'historial'])->name('citas.historial');
+
 
 //
 Route::resource('veterinarios', VeterinarioController::class);

@@ -13,8 +13,7 @@ use Illuminate\Support\Facades\Mail;
 use \Illuminate\Support\Facades\Log;
 
 
-class CitaController extends Controller 
-{
+class CitaController extends Controller {
     /**
      * Display a listing of the resource.
      */
@@ -42,8 +41,7 @@ class CitaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-{
+    public function store(Request $request){
     $request->validate([
         'fecha' => 'required|date',
         'hora' => 'required',
@@ -97,7 +95,7 @@ class CitaController extends Controller
         Log::warning("No se pudo enviar correo: correo del dueño no disponible");
         return redirect()->route('citas.index')->with('warning', 'Cita creada pero no se pudo enviar correo (correo no disponible)');
     }
-}
+    }
     /**
      * Display the specified resource.
      */
@@ -326,6 +324,20 @@ class CitaController extends Controller
             'prevMonth', 'prevYear', 'nextMonth', 'nextYear',
             'veterinarios'
         ));
+    }
+    public function historial(Request $request){
+    $mascotas = Mascota::all(); // Obtener todas las mascotas
+
+    // Consultar citas médicas con relación a la mascota, dueño y veterinario
+    $query = Cita::with(['mascota', 'dueno', 'veterinario']);
+    
+    if ($request->filled('idMascota')) {
+        $query->where('idMascota', $request->idMascota);
+    }
+
+    $citas = $query->orderBy('fecha', 'desc')->get();
+
+    return view('citas.historial', compact('citas', 'mascotas'));
     }
 }
 

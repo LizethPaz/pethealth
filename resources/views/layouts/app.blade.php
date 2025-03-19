@@ -43,34 +43,25 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('veterinarios.index') }}">Veterinarios</a>
-                        </li>
-
-                        
-                        
+                        </li>                       
                         <li class="nav-item dropdown">
     <a id="citasDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
         Citas
     </a>
 
     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="citasDropdown">
-        <a class="dropdown-item" href="{{ route('citas.index') }}">
-            Lista de Citas
-        </a>
-        <a class="dropdown-item" href="{{ route('citas.calendar') }}">
-            Calendario
-        </a>
-        <a class="dropdown-item" href="{{ route('citas.create') }}">
-            Nueva Cita
-        </a>
+        <a class="dropdown-item" href="{{ route('citas.index') }}"> Lista de Citas</a>
+        <a class="dropdown-item" href="{{ route('citas.calendar') }}"> Calendario</a>
+        <a class="dropdown-item" href="{{ route('citas.create') }}"> Nueva Cita</a>
+        <a class ="dropdown-item" href ="{{ route('citas.historial')}}">
+            Historial de citas </a>
     </div>
 </li>
                         <!-- Puedes agregar más elementos de navegación aquí -->
                     </ul>
                     <!-- En resources/views/layouts/app.blade.php -->
 <!-- Dentro del <nav> o donde tengas tu menú de navegación -->
-
-
-
+    
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Aquí puedes agregar elementos de autenticación si los necesitas -->
