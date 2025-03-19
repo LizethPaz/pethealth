@@ -20,7 +20,7 @@ class CitaController extends Controller
      */
     public function index()
     {
-        $citas = Cita::with(['dueno', 'mascota', 'veterinario'])->orderBy('fecha')->get()::paginate(10);
+        $citas = Cita::with(['dueno', 'mascota', 'veterinario'])->orderBy('fecha')->paginate(10);
         return view('citas.index', compact('citas'));
     }
 

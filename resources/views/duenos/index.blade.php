@@ -52,7 +52,7 @@
                             </tbody>
                         </table>
                         <div class="d-flex justify-content-end">
-                        {{ $mascotas->links('pagination::simple-bootstrap-4') }}
+                        {{ $duenos->links('pagination::simple-bootstrap-4') }}
                         </div>
                     </div>
                 </div>
